@@ -1,4 +1,6 @@
 <?php
+require_once 'config.php';
+
 namespace libs;
 class Conexion
 {
@@ -6,7 +8,7 @@ class Conexion
 
   public function __construct()
   {
-    $this->con = new \mysqli('localhost', 'root', '', 'tienda31');
+    $this->con = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
   }
 
   public function consulta($sql)
