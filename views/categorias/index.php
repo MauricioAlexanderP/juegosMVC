@@ -1,21 +1,9 @@
 <?php
+
 use models\Categorias;
+
 $Categorias = new Categorias();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Mascotas</title>
-  <!-- Bootstrap CSS  -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- SweetAlert2  -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- jQuery  -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
 
 <body>
   <!-- Navbar  -->
@@ -51,7 +39,7 @@ $Categorias = new Categorias();
                 <label for="categoria" class="form-label">Nombre de la Categoria</label>
                 <input type="text" name="categoria" id="categoria" required class="form-control">
               </div>
-              <button type="button" onclick="insertarCategoria()" name="enviar" id="enviar" class="btn btn-primary w-100">Guardar</button>
+              <button type="button" name="enviar" id="enviar" class="btn btn-primary w-100">Guardar</button>
             </form>
           </div>
         </div>
@@ -143,13 +131,14 @@ $Categorias = new Categorias();
     $(document).on('click', '#enviar', function() {
       var categoria = $('#categoria').val();
       $.ajax({
-        url: 'controllers/insert_categorias.php',
+        url: 'categorias/insert',
         type: 'POST',
         dataType: 'json',
         data: {
           categoria: categoria
         },
         success: function(response) {
+          alert(response.message);
           if (response.status === 'success') {
             Swal.fire({
               icon: 'success',
@@ -246,5 +235,3 @@ $Categorias = new Categorias();
     });
   </script>
 </body>
-
-</html>

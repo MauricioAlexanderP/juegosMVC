@@ -25,7 +25,8 @@ class Categorias extends Crud
 
   public function insert($data)
   {
-    $sql = "INSERT INTO categorias(nombre) VALUES ($data)";
+    $data = $this->secureSQL($data);
+    $sql = "INSERT INTO categorias(categoria) VALUES ('$data')";
     return $this->consulta($sql);
   }
 
@@ -33,7 +34,7 @@ class Categorias extends Crud
   {
     $id = $this->secureSQL($data[0]);
     $nombre = $this->secureSQL($data[1]);
-    $sql = "UPDATE categorias SET nombre = '$nombre' WHERE id = $id";
+    $sql = "UPDATE categorias SET categoria = '$nombre' WHERE id = $id";
   }
 
   public function delete($id)

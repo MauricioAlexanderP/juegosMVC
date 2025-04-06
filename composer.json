@@ -5,7 +5,9 @@
             "Mauricio\\JuegosMvc\\": "src/",
             "models\\": "models/",
             "controllers\\": "controllers/",
-            "libs\\": "libs/"
+            "libs\\": "libs/",
+            "services\\categorias\\": "services/categorias/",
+            "services\\juegos\\": "services/juegos/"
         }
     },
     "authors": [
