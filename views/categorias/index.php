@@ -4,6 +4,19 @@ use models\Categorias;
 
 $Categorias = new Categorias();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Categorias</title>
+  <!-- Bootstrap CSS  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- SweetAlert2  -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- jQuery  -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
 
 <body>
   <!-- Navbar  -->
@@ -138,7 +151,6 @@ $Categorias = new Categorias();
           categoria: categoria
         },
         success: function(response) {
-          alert(response.message);
           if (response.status === 'success') {
             Swal.fire({
               icon: 'success',
@@ -235,3 +247,4 @@ $Categorias = new Categorias();
     });
   </script>
 </body>
+</html>

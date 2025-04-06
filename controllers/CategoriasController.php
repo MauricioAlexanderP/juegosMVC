@@ -16,7 +16,7 @@ class CategoriasController
 
   public function insert()
   {
-    //header('Content-Type: application/json; charset=UTF-8');
+    header('Content-Type: application/json; charset=UTF-8');
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
       $categoria = $_POST['categoria'];
