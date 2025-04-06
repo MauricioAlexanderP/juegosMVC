@@ -19,21 +19,26 @@ class Categorias extends Crud
 
   public function selectById($id)
   {
-    // TODO
+    $sql = "SELECT * FROM categorias WHERE id = $id";
+    return $this->consulta($sql);
   }
 
   public function insert($data)
   {
-    // TODO
+    $sql = "INSERT INTO categorias(nombre) VALUES ($data)";
+    return $this->consulta($sql);
   }
 
   public function update($data)
   {
-    // TODO
+    $id = $this->secureSQL($data[0]);
+    $nombre = $this->secureSQL($data[1]);
+    $sql = "UPDATE categorias SET nombre = '$nombre' WHERE id = $id";
   }
 
   public function delete($id)
   {
-    // TODO
+    $sql = "DELETE FROM categorias WHERE id = $id";
+    return $this->consulta($sql);
   }
 }
