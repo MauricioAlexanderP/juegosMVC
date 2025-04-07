@@ -175,7 +175,7 @@ $Categorias = new Categorias();
       var idCategoria = $(this).data('idcategoria');
       console.log(idCategoria);
       $.ajax({
-        url: 'controllers/delete_catetorias.php',
+        url: 'categorias/delete',
         type: 'POST',
         dataType: 'json',
         data: {
