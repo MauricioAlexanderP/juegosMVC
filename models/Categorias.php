@@ -35,6 +35,7 @@ class Categorias extends Crud
     $id = $this->secureSQL($data[0]);
     $nombre = $this->secureSQL($data[1]);
     $sql = "UPDATE categorias SET categoria = '$nombre' WHERE id = $id";
+    return $this->consulta($sql);
   }
 
   public function delete($id)

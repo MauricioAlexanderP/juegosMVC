@@ -60,4 +60,31 @@ class CategoriasController
       }
     }
   }
+
+  public function update()
+  {
+    header('Content-Type: application/json; charset=UTF-8');
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $idCategoria = $_POST['idcategoria'];
+      $categoria = $_POST['categoria'];
+      $datos[0] = $idCategoria;
+      $datos[1] = $categoria;
+      try {
+        $Categorias = new Categorias();
+        $Categorias->update($datos);
+        return json_encode([
+          'status' => 'success',
+          'message' => 'Categoria actualizada correctamente'
+        ]);
+        
+        exit; 
+      } catch (\Throwable $th) {
+        return json_encode(array(
+          'status' => 'error',
+          'message' => 'Error al actualizar la categoria: ' . $th->getMessage()
+        ));
+        exit; 
+      }
+    }
+  }
 }

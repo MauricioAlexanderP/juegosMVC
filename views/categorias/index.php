@@ -219,7 +219,7 @@ $Categorias = new Categorias();
       var categoria = $('#edit-categoria').val();
 
       $.ajax({
-        url: 'controllers/update_categoria.php',
+        url: 'categorias/update',
         type: 'POST',
         dataType: 'json',
         data: {
