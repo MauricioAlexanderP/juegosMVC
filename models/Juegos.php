@@ -20,14 +20,14 @@ class Juegos extends Crud
 
   public function insert($data)
   {
-    $nomJuego = $this->secureSQL($data[0]);
-    $categoria = $this->secureSQL($data[1]);
-    $precio = $this->secureSQL($data[2]);
-    $imagen = $this->secureSQL($data[3]);
-    $clasificacion = $this->secureSQL($data[4]);
-    $existencias = $this->secureSQL($data[5]);
+    $nomJuego = $data[0];
+    $categoria = $data[1];
+    $precio = $data[2];
+    $imagen = $data[3];
+    $clasificacion = $data[4];
+    $existencias = $data[5];
 
-    $sql = "INSERT INTO juego (nomJuego, idcategoia, precio, imagen, clasificacion, existencias)
+    $sql = "INSERT INTO juego(nomJuego, idcategoia, precio, imagen, clasificacion, existencias)
             VALUES ('$nomJuego', '$categoria', '$precio', '$imagen', '$clasificacion', '$existencias')";
     
     return $this->consulta($sql);
