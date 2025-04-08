@@ -239,7 +239,7 @@ $Juegos = new Juegos();
             Swal.fire({
               title: 'Guardado!',
               icon: 'success',
-              text: 'La raza se ha guardado correctamente',
+              text: 'El juego ha guardado correctamente',
               showConfirmButton: true,
             }).then((result) => {
               if (result.isConfirmed) {
