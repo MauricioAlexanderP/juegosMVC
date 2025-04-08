@@ -8,7 +8,7 @@ $Juegos = new Juegos();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de </title>
+  <title>Registro de Juegos</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- SweetAlert2 -->
@@ -121,11 +121,11 @@ $Juegos = new Juegos();
             </thead>
             <tbody>
               <?php
-              // $rs =  $Juegos->select();
-              // $getJuegos = [];
-              // while ($fila = $rs->fetch_assoc()) {
-              //   $getJuegos[] = $fila;
-              // }
+              $rs =  $Juegos->select();
+              $getJuegos = [];
+              while ($fila = $rs->fetch_assoc()) {
+                $getJuegos[] = $fila;
+              }
               ?>
               <?php foreach ($getJuegos as $juego): ?>
                 <tr>
@@ -170,7 +170,7 @@ $Juegos = new Juegos();
             <label for="raza" class="form-label">Categoria</label>
             <select name="categoria" id="categoria" class="form-select">
               <?php
-              require_once "class/Categorias.php";
+              
               $categorias = new Categorias();
               $rs = $categorias->select();
               $getCategorias = [];
@@ -228,7 +228,7 @@ $Juegos = new Juegos();
       formData.append('fichero', file_data);
 
       $.ajax({
-        url: 'controllers/insert_categoria.php',
+        url: 'juegos/insert',
         type: 'POST',
         data: formData,
         processData: false,
@@ -287,14 +287,14 @@ $Juegos = new Juegos();
     });
 
     //(Opcional) Lógica para la vista previa de la imagen en el modal de edición
-    document.getElementById('edit-fichero').addEventListener('change', function(e) {
-      const reader = new FileReader();
-      const img = document.getElementById('modal-img');
-      reader.onload = function(e) {
-        img.src = e.target.result;
-      }
-      reader.readAsDataURL(this.files[0]);
-    });
+    // document.getElementById('edit-fichero').addEventListener('change', function(e) {
+    //   const reader = new FileReader();
+    //   const img = document.getElementById('modal-img');
+    //   reader.onload = function(e) {
+    //     img.src = e.target.result;
+    //   }
+    //   reader.readAsDataURL(this.files[0]);
+    // });
 
     // Lógica para actualizar la raza
     $(document).on('click', '#update', function() {
