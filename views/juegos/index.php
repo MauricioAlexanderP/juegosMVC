@@ -145,7 +145,7 @@ $Juegos = new Juegos();
                       data-foto="<?php "$juego[imagen]" ?>">
                       Editar
                     </button>
-                    <button type="button" id="delete" class="btn btn-danger btn-sm delete-button" data-id="<?= $mascota['idraza'] ?>">Eliminar</button>
+                    <button type="button" id="delete" class="btn btn-danger btn-sm delete-button" data-id="<?= $juego['idJuego'] ?>">Eliminar</button>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -341,19 +341,19 @@ $Juegos = new Juegos();
     // Lógica para eliminar raza
     $(document).on('click', '#delete', function() {
 
-      var idraza = $(this).data('id');
+      var idjuego = $(this).data('id');
       var formData = new FormData();
-      formData.append('id', idraza);
+      formData.append('id', idjuego);
 
       $.ajax({
-        url: 'controllers/delete_raza_controller.php',
+        url: 'juegos/delete',
         type: 'POST',
         data: formData,
         processData: false,
         contentType: false,
         dataType: 'json',
         success: function(response) {
-          if (response.status == 'success') {
+          if (response.status == 200) {
             Swal.fire({
               title: 'Eliminado!',
               icon: 'success',

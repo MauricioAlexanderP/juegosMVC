@@ -80,4 +80,24 @@ class JuegosController
     }
     
   }
+
+  public function delete()
+  {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $id = $_POST["id"];
+      try {
+        $juegos = new Juegos();
+        $juegos->delete($id);
+        return json_encode([
+          'status' => 200,
+          'message' => 'Eliminado correctamente!',
+        ]);
+      } catch (\Throwable $th) {
+        return json_encode([
+          'status' => 500,
+          'message' => 'error'. $th->getMessage(),
+        ]);
+      }
+    }
+  }
 }

@@ -51,6 +51,7 @@ class Juegos extends Crud
 
   public function delete($id)
   {
-    // TODO
+    $sql = "DELETE FROM juego WHERE idjuego = $id";
+    return $this->consulta($sql);
   }
 }
