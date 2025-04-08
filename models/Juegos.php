@@ -45,7 +45,7 @@ class Juegos extends Crud
 
     $sql = "UPDATE juego SET nomJuego = '$nomJuego', idcategoia = '$categoria', 
     precio = '$precio', imagen = '$imagen', clasificacion = '$clasificacion', existencias = '$existencias' 
-    WHERE id = $id";
+    WHERE idJuego = $id";
     return $this->consulta($sql);
   }
 

@@ -1,10 +1,13 @@
 <?php
+
 use models\Juegos;
 use models\Categorias;
+
 $Juegos = new Juegos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +19,7 @@ $Juegos = new Juegos();
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
@@ -58,7 +62,7 @@ $Juegos = new Juegos();
                 <label for="raza" class="form-label fw-semibold">Genero</label>
                 <select name="categoria" id="categoria" class="form-select">
                   <?php
-                  
+
                   $categorias = new Categorias();
                   $rs = $categorias->select();
                   $getCategorias = [];
@@ -140,12 +144,16 @@ $Juegos = new Juegos();
                   <td><?= $juego['clasificacion'] ?></td>
                   <td>
                     <button type="button" class="btn btn-warning btn-sm edit-button me-2"
-                      data-id="<?php $juego['idJuego'] ?>"
-                      data-juego="<?php htmlspecialchars($juego['nomJuego']) ?>"
-                      data-foto="<?php "$juego[imagen]" ?>">
+                      data-id="<?= $juego['idJuego'] ?>"
+                      data-juego="<?= htmlspecialchars($juego['nomJuego']) ?>"
+                      data-categoria="<?= $juego['idcategoia'] ?>"
+                      data-precio="<?= $juego['precio'] ?>"
+                      data-existencias="<?= $juego['existencias'] ?>"
+                      data-clasificacion="<?= $juego['clasificacion'] ?>"
+                      data-foto="<?= $juego['imagen'] ?>">
                       Editar
                     </button>
-                    <button type="button" id="delete" class="btn btn-danger btn-sm delete-button" data-id="<?= $juego['idJuego'] ?>">Eliminar</button>
+                    <button type="button" class="btn btn-danger btn-sm delete-button" data-id="<?= $juego['idJuego'] ?>">Eliminar</button>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -161,16 +169,15 @@ $Juegos = new Juegos();
       <form id="editRazaForm" method="post" enctype="multipart/form-data" class="modal-content">
         <div class="modal-body">
           <!-- Campo oculto para ID -->
-          <input type="hidden" name="idraza" id="edit-idraza">
+          <input type="hidden" name="idjuego" id="edit-idjuego">
           <div class="mb-3">
-            <label for="juego" class="form-label fw-semibold">Nombre del Juego</label>
-            <input type="text" name="juego" id="juego" required class="form-control">
+            <label for="edit-juego" class="form-label fw-semibold">Nombre del Juego</label>
+            <input type="text" name="juego" id="edit-juego" required class="form-control">
           </div>
           <div class="mb-3">
-            <label for="raza" class="form-label">Categoria</label>
-            <select name="categoria" id="categoria" class="form-select">
+            <label for="edit-categoria" class="form-label">Categoria</label>
+            <select name="categoria" id="edit-categoria" class="form-select">
               <?php
-              
               $categorias = new Categorias();
               $rs = $categorias->select();
               $getCategorias = [];
@@ -184,20 +191,24 @@ $Juegos = new Juegos();
             </select>
           </div>
           <div class="mb-3">
-            <label for="juego" class="form-label fw-semibold">Precio</label>
-            <input type="number" name="precio" id="precio" required class="form-control">
+            <label for="edit-precio" class="form-label fw-semibold">Precio</label>
+            <input type="number" name="precio" id="edit-precio" required class="form-control">
           </div>
           <div class="mb-3">
-            <label for="juego" class="form-label fw-semibold">Existencias</label>
-            <input type="number" name="existencias" id="existencias" required class="form-control">
+            <label for="edit-existencias" class="form-label fw-semibold">Existencias</label>
+            <input type="number" name="existencias" id="edit-existencias" required class="form-control">
           </div>
           <div class="mb-3">
-            <label for="fichero" class="form-label fw-semibold">Fotografía</label>
-            <input type="file" name="fichero" id="fichero" accept="image/*" required class="form-control">
+            <label for="edit-fichero" class="form-label fw-semibold">Fotografía</label>
+            <input type="file" name="fichero" id="edit-fichero" accept="image/*" class="form-control">
+            <!-- Vista previa en el modal -->
+            <div id="modal-img-container" class="mt-2 text-center">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NjYyI+PHBhdGggZD0iTTE5IDV2MTRINVY1aDhtLTItMkg1YTIgMiAwIDAgMC0yIDJ2MTRhMiAyIDAgMCAwIDIgMmgxNGEyIDIgMCAwIDAgMi0yVjVhMiAyIDAgMCAwLTItMnpNMTIgMTUuNWw0LTQuNS0yLjU4LTIuNTgtMS40MiAxLjQxTDEzLjUgMTJsLTMuNSAzLjV6Ii8+PC9zdmc+" alt="Vista previa" id="modal-img" class="img-thumbnail" style="max-width: 100%; height: auto;">
+            </div>
           </div>
           <div class="mb-3">
-            <label for="juego" class="form-label fw-semibold">Clasificacion</label>
-            <input type="text" name="clasificacion" id="clasificacion" required class="form-control">
+            <label for="edit-clasificacion" class="form-label fw-semibold">Clasificacion</label>
+            <input type="text" name="clasificacion" id="edit-clasificacion" required class="form-control">
           </div>
         </div>
         <div class="modal-footer">
@@ -211,7 +222,7 @@ $Juegos = new Juegos();
   <!-- Bootstrap Bundle JS (incluye Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Envío del formulario para crear raza (se mantiene la lógica existente)
+    // Envío del formulario para crear juego
     $(document).on('click', '#enviar', function() {
       var juego = $('#juego').val();
       var categoria = $('#categoria').val();
@@ -219,6 +230,7 @@ $Juegos = new Juegos();
       var existencias = $('#existencias').val();
       var clasificacion = $('#clasificacion').val();
       var file_data = $('#fichero').prop('files')[0];
+
       var formData = new FormData();
       formData.append('juego', juego);
       formData.append('categoria', categoria);
@@ -239,7 +251,7 @@ $Juegos = new Juegos();
             Swal.fire({
               title: 'Guardado!',
               icon: 'success',
-              text: 'El juego ha guardado correctamente',
+              text: 'El juego ha sido guardado correctamente',
               showConfirmButton: true,
             }).then((result) => {
               if (result.isConfirmed) {
@@ -271,44 +283,70 @@ $Juegos = new Juegos();
       reader.readAsDataURL(this.files[0]);
     });
 
-    // Lógica para abrir el modal de edición y cargar datos
+    // Lógica para abrir el modal de edición y cargar datos en el formulario de edición
     $(document).on('click', '.edit-button', function() {
+      // Se asume que en cada botón de edición se han definido los data-* correspondientes:
+      // data-id, data-juego, data-categoria, data-precio, data-existencias, data-clasificacion y data-foto
       var id = $(this).data('id');
       var juego = $(this).data('juego');
+      var categoria = $(this).data('categoria');
+      var precio = $(this).data('precio');
+      var existencias = $(this).data('existencias');
+      var clasificacion = $(this).data('clasificacion');
       var foto = $(this).data('foto');
 
-      $('#edit-idraza').val(id);
-      $('#edit-raza').val(juego);
-      $('#modal-img').attr('src', foto);
+      // Cargar los datos en los campos del modal
+      $('#edit-idjuego').val(id);
+      $('#edit-juego').val(juego);
+      $('#edit-categoria').val(categoria);
+      $('#edit-precio').val(precio);
+      $('#edit-existencias').val(existencias);
+      $('#edit-clasificacion').val(clasificacion);
+      if (foto) {
+        $('#modal-img').attr('src', foto);
+      } else {
+        $('#modal-img').attr('src', 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NjYyI+PHBhdGggZD0iTTE5IDV2MTRINVY1aDhtLTItMkg1YTIgMiAwIDAgMC0yIDJ2MTRhMiAyIDAgMCAwIDIgMmgxNGEyIDIgMCAwIDAgMi0yVjVhMiAyIDAgMCAwLTItMnpNMTIgMTUuNWw0LTQuNS0yLjU4LTIuNTgtMS40MiAxLjQxTDEzLjUgMTJsLTMuNSAzLjV6Ii8+PC9zdmc+');
+      }
 
-      // Abre el modal de Bootstrap
+      // Mostrar el modal de edición
       var editModal = new bootstrap.Modal(document.getElementById('editModal'));
       editModal.show();
     });
 
-    //(Opcional) Lógica para la vista previa de la imagen en el modal de edición
-    // document.getElementById('edit-fichero').addEventListener('change', function(e) {
-    //   const reader = new FileReader();
-    //   const img = document.getElementById('modal-img');
-    //   reader.onload = function(e) {
-    //     img.src = e.target.result;
-    //   }
-    //   reader.readAsDataURL(this.files[0]);
-    // });
+    // Vista previa de la imagen en el modal de edición
+    document.getElementById('edit-fichero').addEventListener('change', function(e) {
+      const reader = new FileReader();
+      const img = document.getElementById('modal-img');
+      reader.onload = function(e) {
+        img.src = e.target.result;
+      }
+      reader.readAsDataURL(this.files[0]);
+    });
 
-    // Lógica para actualizar la raza
+    // Lógica para actualizar el juego a través del formulario de edición
     $(document).on('click', '#update', function() {
-      //console.log('click')
-      var idraza = $('#edit-idraza').val();
-      var raza = $('#edit-raza').val();
+      var idjuego = $('#edit-idjuego').val();
+      var juego = $('#edit-juego').val();
+      var categoria = $('#edit-categoria').val();
+      var precio = $('#edit-precio').val();
+      var existencias = $('#edit-existencias').val();
+      var clasificacion = $('#edit-clasificacion').val();
       var file_data = $('#edit-fichero').prop('files')[0];
+
       var formData = new FormData();
-      formData.append('idraza', idraza);
-      formData.append('raza', raza);
-      formData.append('fichero', file_data);
+      formData.append('idjuego', idjuego);
+      formData.append('juego', juego);
+      formData.append('categoria', categoria);
+      formData.append('precio', precio);
+      formData.append('existencias', existencias);
+      formData.append('clasificacion', clasificacion);
+      // Solo se envía el archivo si se ha seleccionado uno
+      if (file_data !== undefined) {
+        formData.append('fichero', file_data);
+      }
 
       $.ajax({
-        url: 'controllers/update_raza.php',
+        url: 'juegos/update',
         type: 'POST',
         data: formData,
         processData: false,
@@ -319,7 +357,7 @@ $Juegos = new Juegos();
             Swal.fire({
               title: 'Actualizado!',
               icon: 'success',
-              text: 'La raza se ha actualizado correctamente',
+              text: 'El juego se ha actualizado correctamente',
               showConfirmButton: true,
             }).then((result) => {
               if (result.isConfirmed) {
@@ -338,9 +376,8 @@ $Juegos = new Juegos();
       });
     });
 
-    // Lógica para eliminar raza
+    // Lógica para eliminar juego
     $(document).on('click', '#delete', function() {
-
       var idjuego = $(this).data('id');
       var formData = new FormData();
       formData.append('id', idjuego);
@@ -373,8 +410,9 @@ $Juegos = new Juegos();
             });
           }
         }
-      })
+      });
     });
   </script>
 </body>
+
 </html>
